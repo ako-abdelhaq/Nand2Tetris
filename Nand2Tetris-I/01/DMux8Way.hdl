@@ -1,0 +1,47 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor:
+ * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
+ *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
+ *                            etc.
+ *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    // Put your code here:
+    Not( in = sel[0] , out = Notsel0 );
+    Not( in = sel[1] , out = Notsel1 );
+    Not( in = sel[2] , out = Notsel2 );
+    And( a = sel[0] , b = sel[1] , out = sel0Andsel1 );
+    And( a = Notsel0 , b = Notsel1 , out = Notsel0AndNotsel1 );
+    And( a = sel[0] , b = Notsel1 , out = sel0AndNotsel1 ); 
+    And( a = Notsel0 , b = sel[1] , out = Notsel0Andsel1 );
+    
+    And( a = Notsel0AndNotsel1 , b = sel[2] , out = Notsel0AndNotsel1Andsel2 );
+    And( a = sel0AndNotsel1 , b = sel[2] , out = sel0AndNotsel1Andsel2 );
+    And( a = Notsel0Andsel1 , b = sel[2] , out = Notsel0Andsel1Andsel2 );
+    And( a = sel0Andsel1 , b = sel[2] , out = sel0Andsel1Andsel2 );
+    
+    And( a = Notsel0AndNotsel1 , b = Notsel2 , out = Notsel0AndNotsel1AndNotsel2 );
+    And( a = sel0AndNotsel1 , b = Notsel2 , out = sel0AndNotsel1AndNotsel2 );
+    And( a = Notsel0Andsel1 , b = Notsel2 , out = Notsel0Andsel1AndNotsel2 );
+    And( a = sel0Andsel1 , b = Notsel2 , out = sel0Andsel1AndNotsel2 );
+
+    And( a = in , b = Notsel0AndNotsel1AndNotsel2 , out = a );
+    And( a = in , b = sel0AndNotsel1AndNotsel2 , out = b );
+    And( a = in , b = Notsel0Andsel1AndNotsel2 , out = c );
+    And( a = in , b = sel0Andsel1AndNotsel2 , out = d );
+    And( a = in , b = Notsel0AndNotsel1Andsel2 , out = e );
+    And( a = in , b = sel0AndNotsel1Andsel2 , out = f );
+    And( a = in , b = Notsel0Andsel1Andsel2 , out = g );
+    And( a = in , b = sel0Andsel1Andsel2 , out = h );
+
+}

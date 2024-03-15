@@ -1,0 +1,47 @@
+		 --------------	Tik-Tak-Toe Game  --------------		
+
+Welcome to the 2-players TikTakToe game
+
+This game consists of two players challenging each other , To run the game open the VMEmulator
+and select the file 'VME.tst' ( or 'VME' ) as a script file for the emulator.
+
+to play you need follow the steps :
+
+1/ The first player has to choose a pattern ( either X or O ) using the keys "X" and "O".
+
+2/ Then he/she has choose a place (from the possible 9 places) to put his/her pattern :
+				-------------
+				| 7 | 8 | 9 |
+        			-------------
+				| 4 | 5 | 6 |
+        			-------------
+				| 1 | 2 | 3 |
+				-------------
+
+    for example if you press the key "X" in the keyboard 
+	and you type the key "4" , the screen will end up showing this :
+
+				-------------
+				|   |   |   |
+        			-------------
+				| X |   |   |
+        			-------------
+				|   |   |   |
+				-------------
+
+3/ Then it comes the second player's round , and he/she has to do follow the previous two steps.
+
+
+
+
+					-------- Warning --------
+
+	1/ The game doesn't take care of the players choises so you need to be careful when
+you choose the patterns and the places where to put the patterns , if the first player chooses
+the pattern "X" then the other player has to choose "O" and they must use these patterns as long
+as the game is still running.
+
+	2/ The game ends after 9 rounds and it dosen't tell the players if anyone of them had 
+won the game , so it's up to the players to detrmine if one of them had won.
+
+	3/ To quit the game you it's sufficient that one of the two players press the key "Q". 

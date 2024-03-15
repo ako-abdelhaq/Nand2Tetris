@@ -1,0 +1,97 @@
+/* This is the TikTakToe class , it creates the main grid ,
+ on which the game takes place. It also handles the drawing 
+ issues , like drawing the "X" pattern or the "O" pattern ,
+ according to the desires of the players.
+ */
+
+class TikTakToe {
+
+   field int x, y; 
+   field int size; 
+	// The Constructor :
+   constructor TikTakToe new(int Ax, int Ay, int Asize) {
+      let x = Ax;
+      let y = Ay;
+      let size = Asize;
+      do draw();
+	  
+      return this;
+   }
+	/** Dispose this game session ( the grid and the patterns ) */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Draws the grid on the screen. */
+   method void draw() {
+      do Screen.setColor(true);
+	  
+	  do Screen.drawLine( x , y , x + size , y );
+	  do Screen.drawLine( x , y + 1, x + size , y + 1 );
+	  do Screen.drawLine( x , y + 2, x + size , y + 2 );
+	  
+	  do Screen.drawLine( x , y , x , y + size);
+	  do Screen.drawLine( x + 1 , y , x + 1  , y + size );
+	  do Screen.drawLine( x + 2 , y , x + 2, y + size );
+	  
+	  do Screen.drawLine( x + size, y , x + size, y + size );
+	  do Screen.drawLine( x + size - 1, y , x + size - 1, y + size );
+	  do Screen.drawLine( x + size - 2, y , x + size - 2, y + size );
+	  
+	  do Screen.drawLine( x , y + size, x + size , y + size );
+	  do Screen.drawLine( x , y + size - 1, x + size , y + size - 1 );
+	  do Screen.drawLine( x , y + size - 2, x + size , y + size - 2 );
+	  
+	  
+	  do Screen.drawLine( x , y + 84, x + size , y + 84 );
+	  do Screen.drawLine( x , y + 84 + 1, x + size , y + 84 + 1 );
+	  do Screen.drawLine( x , y + 2 + 84, x + size , y + 84 + 2 );
+	  
+	  do Screen.drawLine( x , y + 84 + 84, x + size , y + 84 + 84 );
+	  do Screen.drawLine( x , y + 84 + 1 + 84, x + size , y + 84 + 1 + 84);
+	  do Screen.drawLine( x , y + 2 + 84 + 84, x + size , y + 84 + 2 + 84);
+	  
+	  do Screen.drawLine( x + size - 84, y , x + size -84, y + size );
+	  do Screen.drawLine( x + size - 1 - 84, y , x + size - 84 - 1, y + size );
+	  do Screen.drawLine( x + size - 2 -84, y , x + size - 84 - 2, y + size );
+	  
+	  do Screen.drawLine( x + size - 84 - 84, y , x + size - 84 - 84, y + size );
+	  do Screen.drawLine( x + size - 1 - 84 - 84, y , x + size - 84 - 84 - 1, y + size );
+	  do Screen.drawLine( x + size - 2 - 84 - 84, y , x + size - 84 - 84 - 2, y + size );
+	  
+      return;
+   }
+
+	/** Draw the pattern "X" : */
+	method void drawX( int c , int r ){ 
+		
+		let c = 84*c ;
+		let r = 84*r ;
+		
+		do Screen.drawLine( x + 20 + c , y + 20 + r , x + 20 + 42 + c, y + 20 + 42 + r );
+		do Screen.drawLine( x + 20 + c , y + 20 + 1 + r , x + 20 + 42 + c, y + 20 + 42 + 1 + r );
+		do Screen.drawLine( x + 20 + c , y + 20 + 2  + r , x + 20 + 42 + c, y + 20 + 42 + 2 + r );
+		
+		do Screen.drawLine( x + 20 + c , y + 20 + 42 + r , x + 20 + 42 + c , y + 20 + r );
+		do Screen.drawLine( x + 20 + c , y + 20 + 42 + 1 + r , x + 20 + 42 + c , y + 20 + 1 + r);
+		do Screen.drawLine( x + 20 + c , y + 20 + 42 + 2 + r , x + 20 + 42 + c , y + 20 + 2 + r);
+		
+		return;
+	}
+	
+	/** Draw the pattern "O" : */
+	method void drawO( int c , int r ){
+	
+		let c = 84*c ;
+		let r = 84*r ;
+		do Screen.setColor(true);
+		do Screen.drawCircle( x + 42 + c , y + 42 + r , 25);
+		do Screen.setColor(false);
+		do Screen.drawCircle( x + 42 + c , y + 42 + r , 22);
+		do Screen.setColor(true);
+		
+		return;
+	}
+	
+}

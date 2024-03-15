@@ -1,0 +1,70 @@
+/** This class implements the game session for the TikTakToe game */
+class Game {
+   field TikTakToe session; 
+   field int c , r ; 
+
+   /** Constructs a new TikTakToe Game. */
+   constructor Game new() {
+      // Create the new session
+      let session = TikTakToe.new(255, 0, 252);
+	  let c = -1;
+	  let r = -1;
+      return this;
+   }
+
+   /** Disposes this game. */
+   method void dispose() {
+      do session.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+   
+   /** Runs the game: handles the players inputs and draw the patterns accordingly */
+   method void run() {
+      var char X_O , key;  // the keys currently pressed by the user
+      var boolean exit;
+	  var int plays;
+	  var int x;
+      let exit = false;
+	  let plays = 0;
+      while ( ~exit & (plays < 9) ) {
+		do Screen.setColor(false);
+         // waits for a key to be pressed
+		while ( X_O = 0 ) {
+			let X_O = Keyboard.readChar();
+			if (X_O = 81)  { let exit = true; }     // q key
+			if (X_O = 79)  { let x = 0; }    		// o key
+			if (X_O = 88)  { let x = 1; }    		// x key
+		}
+		while ( key = 0 ) {
+             let key = Keyboard.readChar();
+			 if (key = 49) { let c = 0 ; let r = 2 ; }   // 1 key
+			 if (key = 50) { let c = 1 ; let r = 2 ; }   // 2 key
+			 if (key = 51) { let c = 2 ; let r = 2 ; }   // 3 key
+			 if (key = 52) { let c = 0 ; let r = 1 ; }   // 4 key
+			 if (key = 53) { let c = 1 ; let r = 1 ; }   // 5 key
+			 if (key = 54) { let c = 2 ; let r = 1 ; }   // 6 key
+			 if (key = 55) { let c = 0 ; let r = 0 ; }   // 7 key
+			 if (key = 56) { let c = 1 ; let r = 0 ; }   // 8 key
+			 if (key = 57) { let c = 2 ; let r = 0 ; }   // 9 key
+			 
+			 if( ~( key = 0 ) & ~( X_O = 0 ) ){
+				do Screen.setColor(true);
+				if ( x = 1 ){
+					do session.drawX( c , r ); 	
+				}
+				if ( x = 0 ){
+					do session.drawO( c , r ); 	
+				}
+				do Screen.setColor(false);
+			}
+			
+        }
+		
+		let key = 0;
+		let X_O = 0;
+        let plays = plays + 1; // Encreasing the round number
+     } // while
+     return;
+   }
+}
